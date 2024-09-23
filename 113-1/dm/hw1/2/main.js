@@ -47,7 +47,7 @@ r(()=>{showLoad(); fetch("../w02_data_to_st.csv").then(res => {return res.text()
         const p = level[k]/csv.length;
         if(p < min){min = p;}
         if(p > max){max = p;}
-        all_tr += `<td style='--x:${p}; --size:calc(var(--a) * var(--x) + var(--b));'><span class="data font-monospace">${level[k]}</span></td>`
+        all_tr += `<td style='--x:${p}; --size:calc(var(--a) * var(--x) + var(--b));'><span class="data text-nowrap font-monospace">${level[k]}</span></td>`
     })
     document.querySelector("#all").innerText = all_str;
     tbody += `<tr>${all_tr}</tr>`;
@@ -61,7 +61,7 @@ r(()=>{showLoad(); fetch("../w02_data_to_st.csv").then(res => {return res.text()
             const p = level_area[k][kk]/csv.length;
             if(p < min){min = p;}
             if(p > max){max = p;}
-            tr += `<td style='--x:${p}; --size:calc(var(--a) * var(--x) + var(--b));'><span class="data font-monospace">${level_area[k][kk]}</span></td>`
+            tr += `<td style='--x:${p}; --size:calc(var(--a) * var(--x) + var(--b));'><span class="data text-nowrap font-monospace">${level_area[k][kk]}</span></td>`
         })
         area_str += `<div class='mt-3'>地區 ${k}<br>　　${tmp}</div>`;
         tbody += `<tr>${tr}</tr>`;
@@ -70,9 +70,9 @@ r(()=>{showLoad(); fetch("../w02_data_to_st.csv").then(res => {return res.text()
     
     const a = (1-0.1-0.1) / (max - min);
     const b = -min * a + 0.1;
-    document.querySelector("#my-chart > table > tbody").style.setProperty('--a', a);
-    document.querySelector("#my-chart > table > tbody").style.setProperty('--b', b);
-    document.querySelector("#my-chart > table > tbody").innerHTML = tbody;
+    document.querySelector("#my-chart table > tbody").style.setProperty('--a', a);
+    document.querySelector("#my-chart table > tbody").style.setProperty('--b', b);
+    document.querySelector("#my-chart table > tbody").innerHTML = tbody;
 
     hideLoad();
 });})
