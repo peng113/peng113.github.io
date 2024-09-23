@@ -1,0 +1,59 @@
+:root{
+    --bs-blue: #2196f3;
+    --bs-primary: #2196f3;
+    --bs-primary-rgb: 33, 150, 243;
+    --bs-green: #4caf50;
+    --bs-success: #4caf50;
+    --bs-success-rgb: 76, 175, 80;
+    --bs-cyan: #00bcd4;
+    --bs-info: #00bcd4;
+    --bs-info-rgb: 0, 188, 212;
+    --bs-red: #ff3333;
+    --bs-danger: #ff3333;
+    --bs-danger-rgb: 255, 51, 51;
+}
+html[data-bs-theme=dark] .charts-css{
+    --primary-axis-color: #fff;
+    --secondary-axes-color: rgba(255, 255, 255, .15);
+    --data-axes-color: rgba(255, 255, 255, .15);
+}
+
+.bi {
+    fill: currentColor;
+}
+.w-1rem {width: 1rem;}
+.w-2rem {width: 2rem;}
+.w-3rem {width: 3rem;}
+.w-4rem {width: 4rem;}
+.w-5rem {width: 5rem;}
+@media (min-width: 576px) {
+    .border-sm{border: var(--bs-border-width) var(--bs-border-style) var(--bs-border-color) !important;}
+    .border-sm-0 {border: 0 !important;}
+    .border-bottom-sm{border-bottom: var(--bs-border-width) var(--bs-border-style) var(--bs-border-color) !important;}
+}
+@media (min-width: 768px) {
+    .border-md{border: var(--bs-border-width) var(--bs-border-style) var(--bs-border-color) !important;}
+    .border-md-0 {border: 0 !important;}
+    .border-bottom-md{border-bottom: var(--bs-border-width) var(--bs-border-style) var(--bs-border-color) !important;}
+}
+@media (min-width: 992px) {
+    .border-lg{border: var(--bs-border-width) var(--bs-border-style) var(--bs-border-color) !important;}
+    .border-lg-0 {border: 0 !important;}
+    .border-bottom-lg{border-bottom: var(--bs-border-width) var(--bs-border-style) var(--bs-border-color) !important;}
+}
+@media (min-width: 1200px) {
+    .border-xl{border: var(--bs-border-width) var(--bs-border-style) var(--bs-border-color) !important;}
+    .border-xl-0 {border: 0 !important;}
+    .border-bottom-xl{border-bottom: var(--bs-border-width) var(--bs-border-style) var(--bs-border-color) !important;}
+}
+@media (min-width: 1400px) {
+    .border-xxl{border: var(--bs-border-width) var(--bs-border-style) var(--bs-border-color) !important;}
+    .border-xxl-0 {border: 0 !important;}
+    .border-bottom-xxl{border-bottom: var(--bs-border-width) var(--bs-border-style) var(--bs-border-color) !important;}
+}
+
+.w-max-640px{max-width: 640px;}
+.h-min-60px{min-height: 60px;}
+.h-min-120px{min-height: 120px;}
+.h-min-240px{min-height: 240px;}
+.h-min-360px{min-height: 360px;}
