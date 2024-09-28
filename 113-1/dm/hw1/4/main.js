@@ -1,10 +1,17 @@
 let all_avg = 0;
 
+function getN(n){
+    const a = all_avg + n;
+    if(a > 100){return 100;}
+    if(a < 0){return 0;}
+    return a;
+}
+
 function getLevel(n){
-    if(n >= all_avg+16){ return "A"; }
-    else if(n >= all_avg+6){return "B";}
-    else if(n >= all_avg-5){return "C";}
-    else if(n >= all_avg-13){return "D";}
+    if(n >= getN(16)){ return "A"; }
+    else if(n >= getN(6)){return "B";}
+    else if(n >= getN(-5)){return "C";}
+    else if(n >= getN(-13)){return "D";}
     else{return "E";}
 }
 
@@ -31,6 +38,13 @@ r(()=>{showLoad(); fetch("../w02_data_to_st.csv").then(res => {return res.text()
     };
     all_avg = (total / csv.length);
     console.log(all_avg);
+    
+    document.querySelector("#table_label").innerHTML = 
+        `<li> A (100 ~ ${roundTo(getN(16), 2).toFixed(2)}) </li>`+
+        `<li> B (${roundTo(getN(15), 2).toFixed(2)} ~ ${roundTo(getN(6), 2).toFixed(2)}) </li>`+
+        `<li> C (${roundTo(getN(5), 2).toFixed(2)} ~ ${roundTo(getN(-5), 2).toFixed(2)}) </li>`+
+        `<li> D (${roundTo(getN(-4), 2).toFixed(2)} ~ ${roundTo(getN(-13), 2).toFixed(2)}) </li>`+
+        `<li> E (${roundTo(getN(-14), 2).toFixed(2)} ~ 0) </li>`;
 
     csv.forEach((a)=>{
         let m = a[2];
