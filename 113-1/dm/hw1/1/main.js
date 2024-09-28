@@ -1,5 +1,5 @@
 r(()=>{showLoad(); fetch("../w02_data_to_st.csv").then(res => {return res.text();}).then(str => {
-    let area_str="", tbody="";
+    let tbody="";
     let total = 0;
     let total_area = {};
     
@@ -24,19 +24,25 @@ r(()=>{showLoad(); fetch("../w02_data_to_st.csv").then(res => {return res.text()
     };
     
     const avg = (total / csv.length);
-    document.querySelector("#avg").innerText = roundTo(avg, 2).toFixed(2);
+    let tab_h = "<th>總體平均</th>";
+    let tab_b = `<td class="v${roundTo(avg, 2).toFixed(2).replace(".","_")}">${roundTo(avg, 2).toFixed(2)}</td>`;
     tbody += `<tr><th scope="row">總體平均</th><td style='--size:${avg/100};'><span class="data font-monospace"> ${roundTo(avg, 2).toFixed(2)} </span></td></tr>`;
-    let min = Infinity, max = 0;
+    let min = avg/100, max = avg/100;
     Object.keys(total_area).forEach((k)=>{
         const avg = total_area[k].t / total_area[k].c;
         total_area[k].avg = avg;
         let p = avg/100;
         if(p < min){min = p;}
         if(p > max){max = p;}
-        area_str += `<div>地區 ${k} 平均：<span>${roundTo(avg, 2).toFixed(2)}</span></div>`;
+        tab_h += `<th>地區 ${k} 平均</th>`;
+        tab_b += `<td class="v${roundTo(avg, 2).toFixed(2).replace(".","_")}">${roundTo(avg, 2).toFixed(2)}</td>`;
         tbody += `<tr><th scope="row">地區 ${k}</th><td style='--x:${p}; --size:calc(var(--a) * var(--x) + var(--b));'><span class="data font-monospace"> ${roundTo(avg, 2).toFixed(2)} </span></td></tr>`;
     })
-    document.querySelector("#area").innerHTML = area_str;
+    document.querySelector("#tab thead tr").innerHTML = tab_h;
+    document.querySelector("#tab tbody tr").innerHTML = tab_b;
+
+    document.querySelector(`#tab .v${roundTo(max*100, 2).toFixed(2).replace(".","_")}`)?.classList.add("text-success");
+    document.querySelector(`#tab .v${roundTo(min*100, 2).toFixed(2).replace(".","_")}`)?.classList.add("text-danger");
 
     const a = (1-0.1-0.1) / (max - min);
     const b = -min * a + 0.1;

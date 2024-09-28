@@ -1,8 +1,10 @@
+let all_avg = 0;
+
 function getLevel(n){
-    if(n >= 80){ return "A"; }
-    else if(n >= 60){return "B";}
-    else if(n >= 40){return "C";}
-    else if(n >= 20){return "D";}
+    if(n >= all_avg+16){ return "A"; }
+    else if(n >= all_avg+6){return "B";}
+    else if(n >= all_avg-5){return "C";}
+    else if(n >= all_avg-13){return "D";}
     else{return "E";}
 }
 
@@ -14,6 +16,7 @@ r(()=>{showLoad(); fetch("../w02_data_to_st.csv").then(res => {return res.text()
 
     const tmp = str.replaceAll("\r", "").split("\n"); tmp.shift();
     let csv = [];
+
     for (let i = 0; i < tmp.length; i++) {
         const t = tmp[i];
         if(t == ""){continue;}
@@ -21,6 +24,15 @@ r(()=>{showLoad(); fetch("../w02_data_to_st.csv").then(res => {return res.text()
         if(a.length != 3){continue;}
         a[1] = parseFloat(a[1]);
         if(isNaN(a[1])){continue;}
+        
+        total += a[1];
+        
+        csv.push(a);
+    };
+    all_avg = (total / csv.length);
+    console.log(all_avg);
+
+    csv.forEach((a)=>{
         let m = a[2];
         const L = getLevel(a[1]);
         if(level_area[m] == undefined){
@@ -28,18 +40,13 @@ r(()=>{showLoad(); fetch("../w02_data_to_st.csv").then(res => {return res.text()
         }
         level[L]++;
         level_area[m][L]++
-        
-        total += a[1];
-        
-        csv.push(a);
-    };
-    
+    })
+
     let min = Infinity, max = 0;
 
     let tab_b = "";
     let tbody="";
-    const avg = (total / csv.length);
-    const avgL = getLevel(avg);
+    const avgL = getLevel(all_avg);
     document.querySelector("#avgL").innerText = `所有人之平均等級：${avgL}`;
     let all_str = "";
     let all_tr = `<th scope="row">總體</th>`;
@@ -68,8 +75,9 @@ r(()=>{showLoad(); fetch("../w02_data_to_st.csv").then(res => {return res.text()
     })
     document.querySelector("#tab > tbody").innerHTML = tab_b;
     
-    const a = (1-0.1-0.1) / (max - min);
-    const b = -min * a + 0.1;
+    const p = 0.1;
+    const a = (1-p-p) / (max - min);
+    const b = -min * a + p;
     document.querySelector("#my-chart table > tbody").style.setProperty('--a', a);
     document.querySelector("#my-chart table > tbody").style.setProperty('--b', b);
     document.querySelector("#my-chart table > tbody").innerHTML = tbody;
